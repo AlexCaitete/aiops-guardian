@@ -29,6 +29,18 @@ O foco principal na construção deste front-end foi utilizar os fundamentos da 
 *   **Efeitos:** Glassmorphism, cursores SVG customizados via CSS, scrollbar personalizada e efeitos "glitch".
 *   **Componentização:** Divisão clara de responsabilidades, com o estado global na tela principal passando props para painéis de *Input* e *Output*.
 
+## 🧪 Como testar o projeto online (Modo Demo)
+
+Você pode ver a interface funcionando direto no navegador, sem precisar baixar o código, acessando o link do deploy: 
+👉 **[Acessar o AIOps Guardian](https://aiops-guardian.vercel.app/)**
+
+Para fazer uma simulação rápida e ver os efeitos visuais em ação, siga este passo a passo:
+
+1. Abra o link do projeto.
+2. Na tela inicial, faça um Uploud de algum arquivo(só para simulação) em seguida clique no botão **"Simular Incidente"**. A interface vai digitar um texto de teste sozinha para você.
+3. Assim que a digitação terminar, clique no botão principal **"Analisar Incidente"**.
+4. A tela vai mudar para o estado de "Analisando" com uma animação de radar verde. Após uns 2 segundos, os cards de resultado vão aparecer no painel da direita, mostrando a resposta letra por letra.
+
 ## 🛠️ Como rodar o projeto localmente
 
 Se você quiser clonar e testar a interface na sua máquina, siga os passos abaixo:

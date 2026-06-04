@@ -1,0 +1,3 @@
+PASTA CRIADA PELO ASSISTENTE!
+
+Arraste a sua pasta "imagens" inteira para dentro desta pasta "public" para que o Next.js consiga carregar a sua logo e o plano de fundo corretamente.

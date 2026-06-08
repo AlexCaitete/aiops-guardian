@@ -2,10 +2,11 @@
 import { useState } from "react";
 import InputPanel from "@/components/InputPanel";
 import AnalysisResult from "@/components/AnalysisResult";
-import { mockData } from "@/components/mockData";
-import { exportReport } from "@/components/exportFile";
 
-// O componente principal inicia aqui (garantindo que não há chaves '}' perdidas antes desta linha)
+// Corrigido: Apontando para o caminho real mapeado nos logs da Vercel
+import { mockData } from "@/utils/mockData";
+import { exportReport } from "@/utils/exportFile";
+
 export default function Home() {
   const [input, setInput] = useState("");
   const [file, setFile] = useState(null);

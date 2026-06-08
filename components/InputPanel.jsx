@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
-import UploadIcon from "./icons/UploadIcon";
+import UploadIcon from "@/app/UploadIcon";
 
 export default function InputPanel({
   input,

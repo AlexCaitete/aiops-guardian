@@ -5,6 +5,7 @@ import AnalysisResult from "@/components/AnalysisResult";
 import { mockData } from "@/components/mockData";
 import { exportReport } from "@/components/exportFile";
 
+// O componente principal inicia aqui (garantindo que não há chaves '}' perdidas antes desta linha)
 export default function Home() {
   const [input, setInput] = useState("");
   const [file, setFile] = useState(null);

@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
-import InputPanel from "@/components/InputPanel";
-import AnalysisResult from "@/components/AnalysisResult";
 
-// Corrigido: Apontando para o caminho real mapeado nos logs da Vercel
-import { mockData } from "@/utils/mockData";
-import { exportReport } from "@/utils/exportFile";
+// Alterado para caminhos relativos nativos (ajustando a quantidade exata de pastas)
+import InputPanel from "../components/InputPanel";
+import AnalysisResult from "../components/AnalysisResult";
+import { mockData } from "../utils/mockData";
+import { exportReport } from "../utils/exportFile";
 
 export default function Home() {
   const [input, setInput] = useState("");

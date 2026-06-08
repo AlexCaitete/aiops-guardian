@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import RobotIcon from "@/app/RobotIcon";
+import RobotIcon from "./icons/RobotIcon"; 
 
 const Typewriter = ({ text, speed = 20 }) => {
   const [displayedText, setDisplayedText] = useState("");

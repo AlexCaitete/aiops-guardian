@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import RobotIcon from "./icons/RobotIcon";
 
 const Typewriter = ({ text, speed = 20 }) => {
   const [displayedText, setDisplayedText] = useState("");
@@ -56,38 +57,7 @@ export default function AnalysisResult({
     <section className="output-section glass-panel">
       {status === "idle" && (
         <div className="empty-state">
-          <svg
-            width="80"
-            height="80"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="var(--metal-green)"
-            strokeWidth="1.5"
-            className="robot-idle"
-          >
-            <rect x="5" y="10" width="14" height="10" rx="2" ry="2" />
-            <path d="M12 10V6" />
-            <circle cx="12" cy="4" r="2" className="robot-antenna-glow" />
-            <circle
-              cx="9"
-              cy="14"
-              r="1.5"
-              fill="var(--neon-green)"
-              stroke="none"
-              className="robot-eye"
-            />
-            <circle
-              cx="15"
-              cy="14"
-              r="1.5"
-              fill="var(--neon-green)"
-              stroke="none"
-              className="robot-eye"
-            />
-            <path d="M10 18h4" />
-            <path d="M2 14h3" />
-            <path d="M19 14h3" />
-          </svg>
+          <RobotIcon className="robot-idle" />
           <h3>Aguardando Telemetria</h3>
           <p>O Agente Inteligente está pronto para analisar os dados.</p>
         </div>

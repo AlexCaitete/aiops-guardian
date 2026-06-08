@@ -1,11 +1,17 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Navbar() {
   return (
     <nav>
       <div className="logo">
         {/* A logo carregará direto da pasta public */}
-        <img src="/logo.png" alt="Logo AIOps Guardian" />
+        <Image
+          src="/logo.png"
+          alt="Logo AIOps Guardian"
+          width={30}
+          height={30}
+        />
         AIOps Guardian
       </div>
       <div className="nav-links">

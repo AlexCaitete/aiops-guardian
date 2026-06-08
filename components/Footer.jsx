@@ -1,14 +1,16 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
     <footer>
       <div className="footer-content">
         <div className="logo" style={{ fontSize: "1.1rem" }}>
-          <img
+          <Image
             src="/logo.png"
             alt="Logo AIOps Guardian"
-            style={{ height: "30px" }}
+            width={30}
+            height={30}
           />
           AIOps Guardian
         </div>

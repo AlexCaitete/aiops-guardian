@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 // Alterado para caminhos relativos nativos (ajustando a quantidade exata de pastas)
 import InputPanel from "../components/InputPanel";
@@ -25,9 +25,22 @@ export default function Home() {
     type: "info",
   });
 
+  // Ref para controlar o timeout do Toast e evitar sobreposição de notificações
+  const toastTimerRef = useRef(null);
+
+  // Efeito para sincronizar os dados da IA quando o idioma mudar
+  useEffect(() => {
+    if (status === "complete" && analysisData) {
+      setAnalysisData(mockData[lang]);
+    }
+  }, [lang, status]); // A dependência garante que só rode se o idioma ou status mudar
+
   const showToast = (message, type = "info") => {
+    if (toastTimerRef.current) {
+      clearTimeout(toastTimerRef.current);
+    }
     setToast({ show: true, message, type });
-    setTimeout(
+    toastTimerRef.current = setTimeout(
       () => setToast({ show: false, message: "", type: "info" }),
       4000,
     );
@@ -135,8 +148,6 @@ export default function Home() {
             className="header-model-select"
             onClick={() => {
               setLang(lang === "pt" ? "en" : "pt");
-              if (analysisData)
-                setAnalysisData(mockData[lang === "pt" ? "en" : "pt"]);
             }}
             title={lang === "pt" ? "Mudar para Inglês" : "Change to Portuguese"}
           >

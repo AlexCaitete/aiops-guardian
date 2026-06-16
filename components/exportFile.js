@@ -1,7 +1,7 @@
-export const exportReport = (analysisData, showToast) => {
+export const exportReport = (analysisData, showToast, t) => {
   if (!analysisData) return;
 
-  const reportContent = `AIOps Guardian v2.0 - Relatório de Análise\n\n1. Resumo Técnico:\n${analysisData.resumo}\n\n2. Causa Raiz:\n${analysisData.causa}\n\n3. Impacto:\n${analysisData.impacto}\n\n4. Criticidade:\n${analysisData.criticidade}\n\n5. Recomendações:\n${analysisData.recomendacoes}\n\n6. Possível Solução:\n${analysisData.solucao}\n\n7. Melhorias Preventivas:\n${analysisData.melhorias}\n`;
+  const reportContent = `${t.reportTitle}\n\n1. ${t.techSummary}:\n${analysisData.resumo}\n\n2. ${t.rootCause}:\n${analysisData.causa}\n\n3. ${t.impact}:\n${analysisData.impacto}\n\n4. ${t.criticality}:\n${analysisData.criticidade}\n\n5. ${t.recommendations}:\n${analysisData.recomendacoes}\n\n6. ${t.possibleSolution}:\n${analysisData.solucao}\n\n7. ${t.prevImprovements}:\n${analysisData.melhorias}\n`;
   const blob = new Blob([reportContent], {
     type: "text/plain;charset=utf-8",
   });
@@ -15,6 +15,6 @@ export const exportReport = (analysisData, showToast) => {
   URL.revokeObjectURL(url);
 
   if (showToast) {
-    showToast("Relatório exportado para o seu dispositivo!", "success");
+    showToast(t.reportExported, "success");
   }
 };

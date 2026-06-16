@@ -9,6 +9,7 @@ export default function InputPanel({
   processFile,
   handleAnalyze,
   status,
+  t,
 }) {
   const fileInputRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -41,7 +42,7 @@ export default function InputPanel({
   const handleLoadDemo = () => {
     if (status === "analyzing") return;
 
-    const demoLog = `faça a anlise pra mim.`;
+    const demoLog = t.demoText;
 
     let currentText = "";
     let i = 0;
@@ -69,14 +70,11 @@ export default function InputPanel({
           >
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
-          <span className="cyber-text" data-text="Comunicação com a IA">
-            Comunicação com a IA
+          <span className="cyber-text" data-text={t.commIA}>
+            {t.commIA}
           </span>
         </h2>
-        <p className="subtitle">
-          Envie logs, XMLs de erro ou descreva o problema ocorrido no ambiente
-          Power Platform.
-        </p>
+        <p className="subtitle">{t.commSub}</p>
       </div>
 
       <div
@@ -105,8 +103,8 @@ export default function InputPanel({
             <span className="file-name">{file.name}</span>
           ) : (
             <span>
-              Clique para anexar arquivos do seu computador <br />
-              <small>(.txt, .xml, .json, .log)</small>
+              {t.clickAttach} <br />
+              <small>{t.extensions}</small>
             </span>
           )}
         </div>
@@ -114,7 +112,7 @@ export default function InputPanel({
 
       <div className="text-area-wrapper" style={{ position: "relative" }}>
         <textarea
-          placeholder="Ou cole a telemetria, log ou contexto do problema aqui..."
+          placeholder={t.placeholder}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           disabled={status === "analyzing"}
@@ -139,7 +137,7 @@ export default function InputPanel({
             >
               <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
             </svg>
-            Simular Incidente
+            {t.simInc}
           </button>
         )}
       </div>
@@ -151,7 +149,7 @@ export default function InputPanel({
       >
         {status === "analyzing" ? (
           <>
-            <span className="spinner"></span> Processando Dados...
+            <span className="spinner"></span> {t.processData}
           </>
         ) : (
           <>
@@ -165,7 +163,7 @@ export default function InputPanel({
             >
               <polygon points="5 3 19 12 5 21 5 3"></polygon>
             </svg>{" "}
-            Analisar Incidente
+            {t.analyzeInc}
           </>
         )}
       </button>

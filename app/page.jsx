@@ -6,8 +6,12 @@ import InputPanel from "../components/InputPanel";
 import AnalysisResult from "../components/AnalysisResult";
 import { mockData } from "../components/mockData";
 import { exportReport } from "../components/exportFile";
+import { translations } from "../components/translations";
 
 export default function Home() {
+  const [lang, setLang] = useState("pt");
+  const t = translations[lang];
+
   const [input, setInput] = useState("");
   const [file, setFile] = useState(null);
   const [status, setStatus] = useState("idle");
@@ -34,23 +38,20 @@ export default function Home() {
     const allowedExtensions = ["txt", "xml", "json", "log"];
     const fileExtension = selectedFile.name.split(".").pop().toLowerCase();
     if (!allowedExtensions.includes(fileExtension)) {
-      showToast("Erro: Formato de arquivo não suportado.", "error");
+      showToast(t.errFormat, "error");
       return;
     }
 
     // Validação Profissional de Tamanho (Máx 2MB)
     if (selectedFile.size > 2 * 1024 * 1024) {
-      showToast("Erro: O arquivo anexado excede o limite de 2MB.", "error");
+      showToast(t.errSize, "error");
       return;
     }
     setFile(selectedFile);
     const reader = new FileReader();
     reader.onload = (event) => {
       setInput(event.target.result);
-      showToast(
-        `Arquivo "${selectedFile.name}" carregado com sucesso.`,
-        "success",
-      );
+      showToast(t.fileLoaded.replace("{name}", selectedFile.name), "success");
     };
     reader.readAsText(selectedFile);
   };
@@ -63,12 +64,12 @@ export default function Home() {
       // Simulação visual 100% no Front-end (Sem usar backend/API)
       await new Promise((resolve) => setTimeout(resolve, 2500));
 
-      setAnalysisData(mockData);
+      setAnalysisData(mockData[lang]);
       setStatus("complete");
-      showToast("Análise de telemetria concluída!", "success");
+      showToast(t.analysisDone, "success");
     } catch (error) {
       setStatus("idle");
-      showToast("Falha na simulação.", "error");
+      showToast(t.simFail, "error");
     }
   };
 
@@ -80,7 +81,7 @@ export default function Home() {
   };
 
   const handleExport = () => {
-    exportReport(analysisData, showToast);
+    exportReport(analysisData, showToast, t);
   };
 
   return (
@@ -115,8 +116,8 @@ export default function Home() {
             </svg>
           </div>
           <h1>
-            <span className="glow-title">AIOps Guardian</span>{" "}
-            <span className="badge">Micro-Agente</span>
+            <span className="glow-title">{t.appTitle}</span>{" "}
+            <span className="badge">{t.badge}</span>
           </h1>
         </div>
         <nav className="header-nav">
@@ -129,7 +130,18 @@ export default function Home() {
             <option value="guardian-v2">AIOps Guardian v2.0</option>
             <option value="fast-tracker">Fast-Tracker Diagnostic v1.5</option>
           </select>
-          <span>Power Platform</span>
+
+          <button
+            className="header-model-select"
+            onClick={() => {
+              setLang(lang === "pt" ? "en" : "pt");
+              if (analysisData)
+                setAnalysisData(mockData[lang === "pt" ? "en" : "pt"]);
+            }}
+            title={lang === "pt" ? "Mudar para Inglês" : "Change to Portuguese"}
+          >
+            {lang === "pt" ? "🌐 EN" : "🌐 PT"}
+          </button>
         </nav>
       </header>
 
@@ -141,18 +153,21 @@ export default function Home() {
           processFile={processFile}
           handleAnalyze={handleAnalyze}
           status={status}
+          t={t}
         />
         <AnalysisResult
           status={status}
           data={analysisData}
           resetAnalysis={resetAnalysis}
           handleExport={handleExport}
+          t={t}
         />
       </div>
 
       {/* Rodapé Terminal */}
       <footer className="terminal-footer">
-        <span className="status-dot"></span> AIOps Guardian v2.0 - Active
+        <span className="status-dot"></span> {t.appTitle} v2.0 -{" "}
+        {t.activeStatus}
       </footer>
     </main>
   );

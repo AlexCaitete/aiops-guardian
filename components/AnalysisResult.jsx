@@ -42,6 +42,7 @@ export default function AnalysisResult({
   data,
   resetAnalysis,
   handleExport,
+  t,
 }) {
   const [isCopied, setIsCopied] = useState(false);
 
@@ -58,16 +59,16 @@ export default function AnalysisResult({
       {status === "idle" && (
         <div className="empty-state">
           <RobotIcon className="robot-idle" />
-          <h3>Aguardando Telemetria</h3>
-          <p>O Agente Inteligente está pronto para analisar os dados.</p>
+          <h3>{t.waitTele}</h3>
+          <p>{t.readyAgent}</p>
         </div>
       )}
 
       {status === "analyzing" && (
         <div className="analyzing-state">
           <div className="radar-spinner"></div>
-          <h3>Analisando Soluções e Fluxos...</h3>
-          <p>Aplicando análise Low-Code e cruzando dados de telemetria.</p>
+          <h3>{t.analyzingFlows}</h3>
+          <p>{t.applyingAnalysis}</p>
         </div>
       )}
 
@@ -89,7 +90,7 @@ export default function AnalysisResult({
                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
               </svg>
-              Análise Concluída
+              {t.analysisComplete}
             </h2>
             <div className="results-actions">
               <button
@@ -112,7 +113,7 @@ export default function AnalysisResult({
                   <line x1="10" y1="11" x2="10" y2="17"></line>
                   <line x1="14" y1="11" x2="14" y2="17"></line>
                 </svg>
-                Limpar Histórico
+                {t.clearHistory}
               </button>
               <button className="btn-secondary" onClick={handleExport}>
                 <svg
@@ -129,10 +130,10 @@ export default function AnalysisResult({
                   <polyline points="7 10 12 15 17 10"></polyline>
                   <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
-                Exportar
+                {t.export}
               </button>
               <button className="btn-reset" onClick={resetAnalysis}>
-                Nova Análise
+                {t.newAnalysis}
               </button>
             </div>
           </div>
@@ -151,31 +152,31 @@ export default function AnalysisResult({
                 <line x1="12" y1="8" x2="12" y2="12"></line>
                 <line x1="12" y1="16" x2="12.01" y2="16"></line>
               </svg>
-              Identificação do Erro
+              {t.errorId}
             </div>
             <div className="card-body">
               <div className="data-row">
-                <span className="data-label">Resumo Técnico</span>
+                <span className="data-label">{t.techSummary}</span>
                 <span className="data-value">
                   <Typewriter text={data.resumo} speed={15} />
                 </span>
               </div>
               <div className="data-row">
-                <span className="data-label">Causa Raiz</span>
+                <span className="data-label">{t.rootCause}</span>
                 <span className="data-value">
                   <Typewriter text={data.causa} speed={15} />
                 </span>
               </div>
               <div className="data-row">
-                <span className="data-label">Impacto</span>
+                <span className="data-label">{t.impact}</span>
                 <span className="data-value">
                   <Typewriter text={data.impacto} speed={15} />
                 </span>
               </div>
               <div className="data-row">
-                <span className="data-label">Criticidade</span>
+                <span className="data-label">{t.criticality}</span>
                 <span
-                  className={`data-value ${data.criticidade.includes("Seguro") ? "badge-safe" : "badge-critical"}`}
+                  className={`data-value ${data.criticidade.includes("Seguro") || data.criticidade.includes("Safe") ? "badge-safe" : "badge-critical"}`}
                 >
                   {data.criticidade}
                 </span>
@@ -195,24 +196,24 @@ export default function AnalysisResult({
               >
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
               </svg>
-              Soluções e Prevenção
+              {t.solutionsPrev}
             </div>
             <div className="card-body">
               <div className="data-row">
-                <span className="data-label">Recomendações</span>
+                <span className="data-label">{t.recommendations}</span>
                 <span className="data-value">
                   <Typewriter text={data.recomendacoes} speed={15} />
                 </span>
               </div>
               <div className="data-row">
-                <span className="data-label">Possível Solução</span>
+                <span className="data-label">{t.possibleSolution}</span>
                 <div className="code-snippet">
                   <button
                     className={`btn-copy ${isCopied ? "copied" : ""}`}
                     onClick={handleCopy}
                     title="Copiar Resolução"
                   >
-                    {isCopied ? "Copiado!" : "Copiar"}
+                    {isCopied ? t.copied : t.copy}
                   </button>
                   <code style={{ whiteSpace: "pre-wrap" }}>
                     <Typewriter text={data.solucao} speed={10} />
@@ -220,7 +221,7 @@ export default function AnalysisResult({
                 </div>
               </div>
               <div className="data-row">
-                <span className="data-label">Melhorias Preventivas</span>
+                <span className="data-label">{t.prevImprovements}</span>
                 <span className="data-value">
                   <Typewriter text={data.melhorias} speed={15} />
                 </span>
